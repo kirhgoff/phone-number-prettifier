@@ -8,14 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 public class LetterConverterTest {
   private final LetterConverter converter = new LetterConverter();
 
-  @Test(dataProvider="fixtures")
-  public void testConverter(int number, String string) {
-    String allCases = string.toLowerCase() + string.toUpperCase();
-    allCases.chars().mapToObj(i -> (char)i)
-      .forEach(chr -> assertThat(converter.convert(chr)).isEqualTo(number));
-  }
-
-  @DataProvider(name = "fixtures")
+  @DataProvider(name = "singleChar")
   public Object[][] getData() {
     return new Object[][]{
         {2, "abc"},
@@ -29,12 +22,39 @@ public class LetterConverterTest {
     };
   }
 
+  @Test(dataProvider="singleChar")
+  public void testConverterChar(int number, String string) {
+    String allCases = string.toLowerCase() + string.toUpperCase();
+    allCases.chars().mapToObj(i -> (char)i)
+        .forEach(chr -> assertThat(converter.convertChar(chr)).isEqualTo(number));
+  }
+
   @Test
   public void testIncorrectInput() throws Exception {
     try {
-      converter.convert('#');
+      converter.convertChar('#');
       fail("Should fail on incorrect input");
     } catch (IllegalArgumentException e) {}
   }
+
+  @DataProvider(name = "words")
+  public Object[][] getWordData() {
+    return new Object[][]{
+      {ints(3, 3, 3), "def"},
+      {ints(2, 3, 4), "adh"},
+    };
+  }
+
+  @Test(dataProvider="words")
+  public void testConverterWord(int[] numbers, String word) {
+     assertThat(converter.convertWord(word)).isEqualTo(numbers);
+  }
+
+
+  private int [] ints (int ... values) {
+    return values;
+  }
+
+
 
 }
