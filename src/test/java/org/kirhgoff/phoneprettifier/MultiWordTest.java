@@ -2,16 +2,15 @@ package org.kirhgoff.phoneprettifier;
 
 import org.testng.annotations.Test;
 
-import java.util.ConcurrentModificationException;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.fail;
 
-public class MultiWordTest {
+public class MultiWordTest implements ArrayUtilsTrait {
   @Test
   public void testMultiWordBasic() throws Exception {
-    MultiWord word = new MultiWord(new NumberArray(new int [] {1}));
+    MultiWord word = new MultiWord(new NumberArray(ints(1)));
     word.addVariant("a");
     word.addVariant("b");
 

@@ -9,7 +9,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.fail;
 
-public class DictionaryTest {
+public class DictionaryTest implements ArrayUtilsTrait {
 
   @Test
   public void testDictionaryCreation() throws Exception {
@@ -19,12 +19,12 @@ public class DictionaryTest {
     dictionary.addWords(words);
 
     //Existent values
-    check(dictionary, new int[]{3, 3, 3}, new String[]{"def", "fed"});
-    check(dictionary, new int[]{3, 4, 3, 2}, new String[]{"dhfa"});
+    check(dictionary, ints(3, 3, 3), strings("def", "fed"));
+    check(dictionary, ints(3, 4, 3, 2), strings("dhfa"));
 
     //No values
-    checkNull(dictionary, new int[]{3, 3});
-    checkNull(dictionary, new int[]{});
+    checkNull(dictionary, ints(3, 3));
+    checkNull(dictionary, ints());
 
     //Bad input
     try {
@@ -39,8 +39,7 @@ public class DictionaryTest {
     assertThat(variants).containsExactly(strings);
   }
   private void checkNull(Dictionary dictionary, int[] number) {
-    MultiWord multiWord = dictionary.wordFor(number);
-    assertThat(multiWord).isNull();
+    assertThat(dictionary.wordFor(number)).isNull();
   }
 
 }

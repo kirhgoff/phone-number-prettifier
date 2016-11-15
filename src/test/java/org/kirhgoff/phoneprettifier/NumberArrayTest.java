@@ -5,13 +5,13 @@ import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.fail;
 
-public class NumberArrayTest {
+public class NumberArrayTest implements ArrayUtilsTrait {
 
   @Test
   public void testHashCodeEquals() throws Exception {
-    checkEqualsHashcode(new int[]{0, 1, 2}, new int[]{0, 1}, new int[]{0});
-    checkEqualsHashcode(new int[]{}, new int[]{0, 1}, new int[]{0});
-    checkEqualsHashcode(new int[]{1}, new int[]{0, 1}, new int[]{0});
+    checkEqualsHashcode(ints(0, 1, 2), ints(0, 1), ints(0));
+    checkEqualsHashcode(ints(), ints(0, 1), ints(0));
+    checkEqualsHashcode(ints(1), ints(0, 1), ints(0));
 
     try {
       new NumberArray(null);
@@ -21,9 +21,9 @@ public class NumberArrayTest {
 
   @Test
   public void testToString() throws Exception {
-    assertThat(new NumberArray(new int [] {}).toString()).isEqualTo("[]");
-    assertThat(new NumberArray(new int [] {1}).toString()).isEqualTo("[1]");
-    assertThat(new NumberArray(new int [] {1, 2}).toString()).isEqualTo("[1, 2]");
+    assertThat(new NumberArray(ints()).toString()).isEqualTo("[]");
+    assertThat(new NumberArray(ints(1)).toString()).isEqualTo("[1]");
+    assertThat(new NumberArray(ints(1, 2)).toString()).isEqualTo("[1, 2]");
   }
 
   private void checkEqualsHashcode(int[] equalData, int[] nonEqual1, int[] nonEqual2) {

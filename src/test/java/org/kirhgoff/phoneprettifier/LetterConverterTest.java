@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class LetterConverterTest {
+public class LetterConverterTest implements ArrayUtilsTrait {
   private final LetterConverter converter = new LetterConverter();
 
   @DataProvider(name = "singleChar")
@@ -49,12 +49,4 @@ public class LetterConverterTest {
   public void testConverterWord(int[] numbers, String word) {
      assertThat(converter.convertWord(word)).isEqualTo(numbers);
   }
-
-
-  private int [] ints (int ... values) {
-    return values;
-  }
-
-
-
 }
