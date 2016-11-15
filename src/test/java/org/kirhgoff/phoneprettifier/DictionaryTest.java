@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.fail;
@@ -34,7 +35,7 @@ public class DictionaryTest {
 
   private void check(Dictionary dictionary, int[] number, String[] strings) {
     MultiWord multiWord = dictionary.wordFor(number);
-    List<String> variants = multiWord.getVariants();
+    Set<String> variants = multiWord.getVariants();
     assertThat(variants).containsExactly(strings);
   }
 }
