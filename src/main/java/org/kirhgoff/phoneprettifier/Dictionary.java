@@ -20,7 +20,7 @@ public class Dictionary {
     }
   }
 
-  public MultiWord wordFor(int[] number) {
-    return null;
+  public MultiWord wordFor(int[] numbers) {
+    return words.get(new NumberArray(numbers));
   }
 }
