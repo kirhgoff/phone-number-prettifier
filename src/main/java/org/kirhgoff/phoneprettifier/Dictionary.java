@@ -1,19 +1,24 @@
 package org.kirhgoff.phoneprettifier;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-/**
- * Created by kirilllastovirya on 15/11/2016.
- */
 public class Dictionary {
-  private final List<String> words;
+  private final LetterConverter converter;
+  private final Map<int [], MultiWord> words = new HashMap<>();
 
-  public Dictionary(List<String> words) {
-    this.words = new ArrayList<>(words);
+  public Dictionary(LetterConverter converter) {
+    this.converter = converter;
   }
 
-  public boolean containsExactly(String number) {
-    return false;
+  public void addWords (List<String> words) {
+//    for (String word : words) {
+//      words.
+//    }
+  }
+
+  public MultiWord wordFor(int[] number) {
+    return null;
   }
 }
