@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Dictionary {
   private final LetterConverter converter;
-  private final Map<int [], MultiWord> words = new HashMap<>();
+  private final Map<int[], MultiWord> words = new HashMap<>();
 
   public Dictionary(LetterConverter converter) {
     this.converter = converter;
@@ -14,7 +14,8 @@ public class Dictionary {
 
   public void addWords (List<String> words) {
 //    for (String word : words) {
-//      words
+//      int [] numeric = converter.convertWord(word);
+//      words.get(numeric);
 //    }
   }
 
