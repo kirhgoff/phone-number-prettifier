@@ -19,11 +19,11 @@ public class NumberArrayTest {
     } catch (IllegalArgumentException e) {}
   }
 
-  @Test(enabled = false)
+  @Test
   public void testToString() throws Exception {
-    assertThat(new NumberArray(new int [] {})).isEqualTo("[]");
-    assertThat(new NumberArray(new int [] {1})).isEqualTo("[1]");
-    assertThat(new NumberArray(new int [] {1, 2})).isEqualTo("[1, 2]");
+    assertThat(new NumberArray(new int [] {}).toString()).isEqualTo("[]");
+    assertThat(new NumberArray(new int [] {1}).toString()).isEqualTo("[1]");
+    assertThat(new NumberArray(new int [] {1, 2}).toString()).isEqualTo("[1, 2]");
   }
 
   private void checkEqualsHashcode(int[] equalData, int[] nonEqual1, int[] nonEqual2) {
