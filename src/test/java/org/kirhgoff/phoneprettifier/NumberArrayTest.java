@@ -7,7 +7,7 @@ import static org.testng.Assert.fail;
 
 public class NumberArrayTest {
 
-  @Test(enabled = false)
+  @Test
   public void testHashCodeEquals() throws Exception {
     checkEqualsHashcode(new int[]{0, 1, 2}, new int[]{0, 1}, new int[]{0});
     checkEqualsHashcode(new int[]{}, new int[]{0, 1}, new int[]{0});
