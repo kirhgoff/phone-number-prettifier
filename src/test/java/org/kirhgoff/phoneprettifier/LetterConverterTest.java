@@ -1,4 +1,4 @@
-package org.kirhgoff.prettyphone;
+package org.kirhgoff.phoneprettifier;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

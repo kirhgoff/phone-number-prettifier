@@ -1,11 +1,9 @@
-package org.kirhgoff.prettyphone;
+package org.kirhgoff.phoneprettifier;
 
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.*;
 
 /**
  * Created by kirilllastovirya on 15/11/2016.

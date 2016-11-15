@@ -1,2 +1,2 @@
 #!/bin/bash
-java -jar target/pretty-phone-number-1.0-SNAPSHOT-executable.jar
+java -jar target/phone-number-prettifier-1.0-SNAPSHOT-executable.jar

@@ -1,4 +1,4 @@
-package org.kirhgoff.prettyphone;
+package org.kirhgoff.phoneprettifier;
 
 public class LetterConverter {
   private final String [] rows = new String [] {

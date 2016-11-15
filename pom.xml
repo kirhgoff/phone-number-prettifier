@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.kirhgoff</groupId>
-	<artifactId>pretty-phone-number</artifactId>
+	<artifactId>phone-number-prettifier</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
  
@@ -31,7 +31,7 @@
               </descriptors>
               <archive>
                   <manifest>
-                      <mainClass>org.kirhgoff.prettyphone.Main</mainClass>
+                      <mainClass>org.kirhgoff.phoneprettifier.Main</mainClass>
                   </manifest>
               </archive>
           </configuration>

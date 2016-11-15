@@ -1,4 +1,4 @@
-package org.kirhgoff.prettyphone;
+package org.kirhgoff.phoneprettifier;
 
 import java.util.ArrayList;
 import java.util.List;

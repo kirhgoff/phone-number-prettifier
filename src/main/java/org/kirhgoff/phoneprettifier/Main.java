@@ -1,4 +1,4 @@
-package org.kirhgoff.prettyphone;
+package org.kirhgoff.phoneprettifier;
 
 /**
  * Created by kirilllastovirya on 15/11/2016.
