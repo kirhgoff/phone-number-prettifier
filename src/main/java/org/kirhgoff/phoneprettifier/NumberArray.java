@@ -1,7 +1,6 @@
 package org.kirhgoff.phoneprettifier;
 
 import java.util.Arrays;
-import java.util.StringJoiner;
 
 public class NumberArray {
   private final int [] array;
@@ -13,16 +12,8 @@ public class NumberArray {
       throw new IllegalArgumentException("nulls are not allowed");
     }
     this.array = Arrays.copyOf(array, array.length);
-    this.hashCode = Arrays.hashCode(array);
-    this.string = Arrays.toString(array);
-  }
-
-  private String makeString(int[] numbers) {
-    StringJoiner joiner = new StringJoiner("[", ", ", "]");
-    for (int number : numbers) {
-      joiner.add(String.valueOf(number));
-    }
-    return joiner.toString();
+    this.hashCode = Arrays.hashCode(this.array);
+    this.string = Arrays.toString(this.array);
   }
 
   @Override
