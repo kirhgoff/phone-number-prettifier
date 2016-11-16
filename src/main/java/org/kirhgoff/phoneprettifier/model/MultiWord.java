@@ -30,7 +30,7 @@ public class MultiWord {
 
   public int findDiffIndex(DigitsArray array) {
     assertNotNull(array);
-    assertSameLength(array);
+    assertIsShorterThan(array);
 
     for (int i = 0; i < length(); i ++) {
       if (array.digitAt(i) != this.number.digitAt(i)) {
@@ -51,9 +51,9 @@ public class MultiWord {
     }
   }
 
-  private void assertSameLength(DigitsArray array) {
-    if (array.length() != this.number.length()) {
-      throw new IllegalArgumentException("Should be of the same length " + this.number.length() + ", while argument is " + array.length() + " digits");
+  private void assertIsShorterThan(DigitsArray array) {
+    if (array.length() < this.number.length()) {
+      throw new IllegalArgumentException("Length of word " + this.number.length() + " should be shorter that length of argument which is " + array.length() + " digits");
     }
   }
 }

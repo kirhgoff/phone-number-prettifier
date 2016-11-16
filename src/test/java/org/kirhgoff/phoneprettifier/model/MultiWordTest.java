@@ -9,6 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.fail;
 
 public class MultiWordTest implements ArrayUtilsTrait {
+
   @Test
   public void testMultiWordBasic() throws Exception {
     MultiWord word = new MultiWord(new DigitsArray(ints(1)));
@@ -37,16 +38,11 @@ public class MultiWordTest implements ArrayUtilsTrait {
 
   @Test
   public void testFindDiffIndexIllegal() throws Exception {
-    MultiWord word = new MultiWord(new DigitsArray(ints(1)));
-    word.addVariant("a");
+    MultiWord word = new MultiWord(new DigitsArray(ints(1, 2, 3)));
+    word.addVariant("abc");
 
     try {
       word.findDiffIndex(digits(2, 2));
-      fail("Should fail");
-    } catch (IllegalArgumentException e) {}
-
-    try {
-      word.findDiffIndex(digits(2, 2, 2, 2));
       fail("Should fail");
     } catch (IllegalArgumentException e) {}
   }

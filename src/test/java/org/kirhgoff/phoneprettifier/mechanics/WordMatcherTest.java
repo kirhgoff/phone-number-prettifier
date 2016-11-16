@@ -18,7 +18,7 @@ public class WordMatcherTest implements ArrayUtilsTrait {
   public void testSimpleMatching() throws Exception {
     LetterConverter converter = new LetterConverter();
     Dictionary dictionary = new Dictionary(converter);
-    dictionary.addWords(Arrays.asList("ad", "be", "c", "ddd"));
+    dictionary.addWords(Arrays.asList("ad", "be", "c", "aj", "ddd"));
     WordMatcher matcher = new WordMatcher();
 
     DigitsArray phone = new DigitsArray(ints(2, 3, 4));
@@ -30,7 +30,8 @@ public class WordMatcherTest implements ArrayUtilsTrait {
 
     assertThat(printed).containsOnly(
       "AD-[4]", "BE-[4]", //Unwraps multiword
-      "C-[3, 4]"
+      "C-[3, 4]",
+      "A3-[4]" //one digit
     );
 
   }
