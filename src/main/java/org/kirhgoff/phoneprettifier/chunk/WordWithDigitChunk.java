@@ -14,6 +14,10 @@ public class WordWithDigitChunk extends ChunkBase {
     wordWithDigit = String.valueOf(myNameChars).toUpperCase();
   }
 
+  public int digitAt(int index) {
+    return 0;
+  }
+
   @Override
   public String toString() {
     return wordWithDigit;

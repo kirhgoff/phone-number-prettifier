@@ -20,6 +20,11 @@ public class DigitsArray {
     this.string = Arrays.toString(this.array);
   }
 
+  public int digitAt(int index) {
+    assertBounds(index);
+    return array[index];
+  }
+
   public int length() {
     return array.length;
   }
@@ -59,6 +64,7 @@ public class DigitsArray {
     return result == 0 ? EQUAL : SINGLE;
   }
 
+  //TODO int parameter is enough
   public DigitsArray bite(DigitsArray other) {
     assertIsLongerThan(other);
     return new DigitsArray(copyOfRange(array, other.length(), array.length));
@@ -72,13 +78,13 @@ public class DigitsArray {
 
   private void assertIsLongerThan(DigitsArray other) {
     if (other.length() > this.length()) {
-      throw new IndexOutOfBoundsException("Argument should be shorter than " + length() + " but it is " + other.length() + " digits long");
+      throw new IndexOutOfBoundsException("Argument should be shorter than " + length() + ", but it is " + other.length() + " digits long");
     }
   }
 
-  private void assertNotEmpty(int[] array) {
-    if (array.length == 0) {
-      throw new IllegalArgumentException("Empty array is not accepted");
+  private void assertBounds(int index) {
+    if (index < 0 || index >= length()) {
+      throw new IndexOutOfBoundsException("Cannot get char at " + index + " while array length is " + length());
     }
   }
 

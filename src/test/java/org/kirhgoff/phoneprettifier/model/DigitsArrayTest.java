@@ -66,7 +66,31 @@ public class DigitsArrayTest implements ArrayUtilsTrait {
   public void testBite() {
     checkBiteResult(digits(1, 2, 3, 4), digits(6, 6), digits(3, 4));
     checkBiteResult(digits(1, 2, 3), digits(6, 6), digits(3));
-    checkBiteResult(digits(1, 2, 3), digits(6, 6, 6), digits()); 
+    checkBiteResult(digits(1, 2, 3), digits(6, 6, 6), digits());
+  }
+
+  @Test
+  public void testDigitAt() throws Exception {
+    DigitsArray digits = digits(0, 1, 2, 3, 4, 5);
+    for (int i = 0; i < digits.length(); i ++) {
+      assertThat(digits.digitAt(i)).isEqualTo(i);
+    }
+
+    try {
+      digits.digitAt(-1);
+      fail("Should fail");
+    } catch (IndexOutOfBoundsException e) {}
+
+    try {
+      digits.digitAt(666);
+      fail("Should fail");
+    } catch (IndexOutOfBoundsException e) {}
+
+    try {
+      digits().digitAt(0);
+      fail("Should fail");
+    } catch (IndexOutOfBoundsException e) {}
+
   }
 
   private Object checkBiteResult(DigitsArray number, DigitsArray number2, DigitsArray result) {
