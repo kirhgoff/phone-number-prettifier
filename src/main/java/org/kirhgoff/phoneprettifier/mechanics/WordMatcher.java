@@ -22,8 +22,12 @@ public class WordMatcher {
   public Set<MatchResult> match(DigitsArray array, Dictionary dictionary) {
 
     Set<MatchResult> results = new HashSet<>();
-    //TODO shift for one symbol and check that the diff is not the first one
     for (MultiWord word : dictionary.getWords()) {
+      //TODO again - reduce dictionary for phone size
+      if (word.length() > array.length()) {
+        continue;
+      }
+
       Diff diff = array.compareWith(word.getNumberArray());
       if (diff == MANY) {
         continue;

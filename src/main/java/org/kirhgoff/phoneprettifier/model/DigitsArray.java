@@ -29,6 +29,10 @@ public class DigitsArray {
     return array.length;
   }
 
+  public boolean isEmpty() {
+    return length() == 0;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

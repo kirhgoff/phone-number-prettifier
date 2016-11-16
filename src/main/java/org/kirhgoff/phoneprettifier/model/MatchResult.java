@@ -7,18 +7,23 @@ import org.kirhgoff.phoneprettifier.chunk.Chunk;
  */
 public class MatchResult {
   private final Chunk head;
-  private final DigitsArray tail;
+  private final DigitsArray remainder;
 
-  public MatchResult(Chunk head, DigitsArray tail) {
+  public MatchResult(Chunk head, DigitsArray remainder) {
     this.head = head;
-    this.tail = tail;
+    this.remainder = remainder;
   }
 
   public Chunk getHead() {
     return head;
   }
 
-  public DigitsArray getTail() {
-    return tail;
+  public DigitsArray getRemainder() {
+    return remainder;
+  }
+
+  @Override
+  public String toString() {
+    return head.toString() + "..." + remainder.toString();
   }
 }

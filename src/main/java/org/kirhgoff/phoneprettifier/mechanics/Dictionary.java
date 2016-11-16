@@ -9,12 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Dictionary {
-  private final LetterConverter converter;
+  private final LetterConverter converter = new LetterConverter();
   private final Map<DigitsArray, MultiWord> words = new HashMap<>();
-
-  public Dictionary(LetterConverter converter) {
-    this.converter = converter;
-  }
 
   public Dictionary addWords (List<String> wordsList) {
     for (String word : wordsList) {

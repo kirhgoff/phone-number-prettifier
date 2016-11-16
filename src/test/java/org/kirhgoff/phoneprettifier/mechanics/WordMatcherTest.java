@@ -16,8 +16,7 @@ public class WordMatcherTest implements ArrayUtilsTrait {
 
   @Test
   public void testSimpleMatching() throws Exception {
-    LetterConverter converter = new LetterConverter();
-    Dictionary dictionary = new Dictionary(converter);
+    Dictionary dictionary = new Dictionary();
     dictionary.addWords(Arrays.asList("ad", "be", "c", "aj", "ddd"));
     WordMatcher matcher = new WordMatcher();
 
@@ -25,7 +24,7 @@ public class WordMatcherTest implements ArrayUtilsTrait {
     Set<MatchResult> results = matcher.match(phone, dictionary);
 
     List<String> printed = results.stream()
-        .map(i -> i.getHead().toString() + "-" + i.getTail().toString())
+        .map(i -> i.getHead().toString() + "-" + i.getRemainder().toString())
         .collect(Collectors.toList());
 
     assertThat(printed).containsOnly(

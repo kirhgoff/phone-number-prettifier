@@ -14,11 +14,17 @@ public class ChunkPrinter {
   }
 
   private void printRecursive(String previousPath, Chunk chunk, List<String> result) {
+    String string = chunk.toString();
     if (chunk.hasNoChildren()) {
-      result.add(previousPath + chunk.toString());
+      result.add(previousPath + string);
     } else {
       for (Chunk child : chunk.getChildren()) {
-        String newPath = previousPath + chunk.toString() + DELIMITER;
+        String newPath; //TODO refactor this
+        if (string.length() == 0) {
+          newPath = previousPath;
+        } else {
+          newPath = previousPath + string + DELIMITER;
+        }
         printRecursive(newPath, child, result);
       }
     }

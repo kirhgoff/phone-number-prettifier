@@ -16,8 +16,7 @@ public class DictionaryTest implements ArrayUtilsTrait {
   @Test
   public void testDictionaryCreation() throws Exception {
     List<String> words = Arrays.asList("def", "fed", "dhfa");
-    LetterConverter converter = new LetterConverter();
-    Dictionary dictionary = new Dictionary(converter);
+    Dictionary dictionary = new Dictionary();
     dictionary.addWords(words);
 
     //Existent values
