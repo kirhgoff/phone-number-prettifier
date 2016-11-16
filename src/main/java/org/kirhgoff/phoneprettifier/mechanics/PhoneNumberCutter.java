@@ -1,7 +1,7 @@
 package org.kirhgoff.phoneprettifier.mechanics;
 
 import org.kirhgoff.phoneprettifier.chunk.Chunk;
-import org.kirhgoff.phoneprettifier.model.NumberArray;
+import org.kirhgoff.phoneprettifier.model.DigitsArray;
 
 import java.util.Set;
 
@@ -12,7 +12,7 @@ public class PhoneNumberCutter {
     this.dictionary = dictionary;
   }
 
-  public Set<Chunk> cut(NumberArray phoneNumber) {
+  public Set<Chunk> cut(DigitsArray phoneNumber) {
     return null;
   }
 }

@@ -5,10 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MultiWord {
-  private final NumberArray number;
+  private final DigitsArray number;
   private final Set<String> words = new HashSet<>();
 
-  public MultiWord(NumberArray number) {
+  public MultiWord(DigitsArray number) {
     this.number = number;
   }
 
@@ -18,5 +18,13 @@ public class MultiWord {
 
   public void addVariant(String word) {
     words.add(word);
+  }
+
+  public int length() {
+    return number.length();
+  }
+
+  public DigitsArray getNumberArray() {
+    return number;
   }
 }

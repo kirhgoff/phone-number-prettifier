@@ -9,32 +9,28 @@ import static org.kirhgoff.phoneprettifier.model.Diff.MANY;
 import static org.kirhgoff.phoneprettifier.model.Diff.SINGLE;
 import static org.testng.Assert.fail;
 
-public class NumberArrayTest implements ArrayUtilsTrait {
+public class DigitsArrayTest implements ArrayUtilsTrait {
 
   @Test
   public void testHashCodeEquals() throws Exception {
     checkEqualsHashcode(ints(0, 1, 2), ints(0, 1), ints(0));
+    checkEqualsHashcode(ints(), ints(0, 1), ints(0));
     checkEqualsHashcode(ints(1), ints(0, 1), ints(0));
   }
 
   @Test
   public void testInvalidParams() throws Exception {
     try {
-      new NumberArray(null);
+      new DigitsArray(null);
       fail("Should fail");
     } catch (IllegalArgumentException e) {}
-
-    try {
-      new NumberArray(ints());
-      fail("Should fail");
-    } catch (IllegalArgumentException e) {}
-
   }
 
   @Test
   public void testToString() throws Exception {
-    assertThat(new NumberArray(ints(1)).toString()).isEqualTo("[1]");
-    assertThat(new NumberArray(ints(1, 2)).toString()).isEqualTo("[1, 2]");
+    assertThat(digits().toString()).isEqualTo("[]");
+    assertThat(digits(1).toString()).isEqualTo("[1]");
+    assertThat(digits(1, 2).toString()).isEqualTo("[1, 2]");
   }
 
   @Test
@@ -60,25 +56,36 @@ public class NumberArrayTest implements ArrayUtilsTrait {
     } catch (IndexOutOfBoundsException e) {}
 
     try {
-      NumberArray first = new NumberArray(ints(1, 2));
+      DigitsArray first = digits(1, 2);
       first.compareWith(null);
       fail("Should fail");
     } catch(IllegalArgumentException e) {}
   }
 
+  @Test
+  public void testBite() {
+    checkBiteResult(digits(1, 2, 3, 4), digits(6, 6), digits(3, 4));
+    checkBiteResult(digits(1, 2, 3), digits(6, 6), digits(3));
+    checkBiteResult(digits(1, 2, 3), digits(6, 6, 6), digits()); 
+  }
+
+  private Object checkBiteResult(DigitsArray number, DigitsArray number2, DigitsArray result) {
+    return assertThat(number.bite(number2)).isEqualTo(result);
+  }
+
   private void checkDiff(int[] source, int[] target, Diff diff) {
-    NumberArray first = new NumberArray(source);
-    NumberArray second = new NumberArray(target);
+    DigitsArray first = new DigitsArray(source);
+    DigitsArray second = new DigitsArray(target);
     assertThat(first.compareWith(second)).isEqualTo(diff);
   }
 
   private void checkEqualsHashcode(int[] equalData, int[] nonEqual1, int[] nonEqual2) {
-    NumberArray one = new NumberArray(equalData);
-    NumberArray two = new NumberArray(equalData);
-    NumberArray three = new NumberArray(equalData);
+    DigitsArray one = new DigitsArray(equalData);
+    DigitsArray two = new DigitsArray(equalData);
+    DigitsArray three = new DigitsArray(equalData);
 
-    NumberArray four = new NumberArray(nonEqual1);
-    NumberArray five = new NumberArray(nonEqual2);
+    DigitsArray four = new DigitsArray(nonEqual1);
+    DigitsArray five = new DigitsArray(nonEqual2);
 
     checkEqual(one, one);
     checkEqual(one, two);
@@ -91,14 +98,15 @@ public class NumberArrayTest implements ArrayUtilsTrait {
     checkNotEqual(four, five);
   }
 
-  private void checkNotEqual(NumberArray one, NumberArray two) {
+  private void checkNotEqual(DigitsArray one, DigitsArray two) {
     assertThat(one).isNotEqualTo(two);
     assertThat(one.hashCode()).isNotEqualTo(two.hashCode());
   }
 
-  private void checkEqual(NumberArray one, NumberArray two) {
+  private void checkEqual(DigitsArray one, DigitsArray two) {
     assertThat(one).isEqualTo(two);
     assertThat(one.hashCode()).isEqualTo(two.hashCode());
   }
+
 
 }

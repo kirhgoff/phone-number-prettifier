@@ -1,8 +1,8 @@
 package org.kirhgoff.phoneprettifier.mechanics;
 
 import org.kirhgoff.phoneprettifier.ArrayUtilsTrait;
-import org.kirhgoff.phoneprettifier.model.Intermediate;
-import org.kirhgoff.phoneprettifier.model.NumberArray;
+import org.kirhgoff.phoneprettifier.model.MatchResult;
+import org.kirhgoff.phoneprettifier.model.DigitsArray;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -20,8 +20,8 @@ public class WordMatcherTest implements ArrayUtilsTrait {
     dictionary.addWords(Arrays.asList("ad", "be", "c", "other"));
     WordMatcher matcher = new WordMatcher();
 
-    NumberArray phone = new NumberArray(ints(2, 3, 4));
-    List<Intermediate> results = matcher.match(phone, dictionary);
+    DigitsArray phone = new DigitsArray(ints(2, 3, 4));
+    List<MatchResult> results = matcher.match(phone, dictionary);
 
     List<String> printed = results.stream()
         .map(i -> i.getHead().toString() + "-" + i.getTail().toString())

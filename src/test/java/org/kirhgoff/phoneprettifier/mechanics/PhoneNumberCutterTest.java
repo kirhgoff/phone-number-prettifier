@@ -2,7 +2,7 @@ package org.kirhgoff.phoneprettifier.mechanics;
 
 import org.kirhgoff.phoneprettifier.ArrayUtilsTrait;
 import org.kirhgoff.phoneprettifier.chunk.Chunk;
-import org.kirhgoff.phoneprettifier.model.NumberArray;
+import org.kirhgoff.phoneprettifier.model.DigitsArray;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -18,7 +18,7 @@ public class PhoneNumberCutterTest implements ArrayUtilsTrait {
     dictionary.addWords(Arrays.asList("a", "b", "h", "d"));
     PhoneNumberCutter cutter = new PhoneNumberCutter(dictionary);
 
-    NumberArray phoneNumber = new NumberArray(ints(2));
+    DigitsArray phoneNumber = new DigitsArray(ints(2));
     Set<Chunk> chunks = cutter.cut(phoneNumber);
     assertThat(chunks).containsExactly(
       //TODO

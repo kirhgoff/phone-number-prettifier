@@ -26,6 +26,7 @@ public class DictionaryTest implements ArrayUtilsTrait {
 
     //No values
     checkWordNotFound(dictionary, ints(3, 3));
+    checkWordNotFound(dictionary, ints());
 
     //Bad input
     try {

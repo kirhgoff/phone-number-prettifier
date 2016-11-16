@@ -2,18 +2,19 @@ package org.kirhgoff.phoneprettifier.model;
 
 import java.util.Arrays;
 
+import static java.util.Arrays.copyOfRange;
 import static org.kirhgoff.phoneprettifier.model.Diff.EQUAL;
 import static org.kirhgoff.phoneprettifier.model.Diff.MANY;
 import static org.kirhgoff.phoneprettifier.model.Diff.SINGLE;
 
-public class NumberArray {
+public class DigitsArray {
   private final int [] array;
   private final int hashCode;
   private final String string;
 
-  public NumberArray(int[] array) {
+  public DigitsArray(int[] array) {
     assertNotNull(array);
-    assertNotEmpty(array);
+
     this.array = Arrays.copyOf(array, array.length);
     this.hashCode = Arrays.hashCode(this.array);
     this.string = Arrays.toString(this.array);
@@ -28,7 +29,7 @@ public class NumberArray {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    NumberArray that = (NumberArray) o;
+    DigitsArray that = (DigitsArray) o;
     return this.hashCode == that.hashCode;
   }
 
@@ -42,7 +43,7 @@ public class NumberArray {
     return string;
   }
 
-  public Diff compareWith(NumberArray other) {
+  public Diff compareWith(DigitsArray other) {
     assertNotNull(other);
     assertIsLongerThan(other);
 
@@ -58,13 +59,18 @@ public class NumberArray {
     return result == 0 ? EQUAL : SINGLE;
   }
 
+  public DigitsArray bite(DigitsArray other) {
+    assertIsLongerThan(other);
+    return new DigitsArray(copyOfRange(array, other.length(), array.length));
+  }
+
   private void assertNotNull(Object some) {
     if (some == null) {
       throw new IllegalArgumentException("Do not accept nulls");
     }
   }
 
-  private void assertIsLongerThan(NumberArray other) {
+  private void assertIsLongerThan(DigitsArray other) {
     if (other.length() > this.length()) {
       throw new IndexOutOfBoundsException("Argument should be shorter than " + length() + " but it is " + other.length() + " digits long");
     }
@@ -75,4 +81,5 @@ public class NumberArray {
       throw new IllegalArgumentException("Empty array is not accepted");
     }
   }
+
 }

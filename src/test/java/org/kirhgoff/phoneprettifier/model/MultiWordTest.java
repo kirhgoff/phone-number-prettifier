@@ -11,7 +11,7 @@ import static org.testng.Assert.fail;
 public class MultiWordTest implements ArrayUtilsTrait {
   @Test
   public void testMultiWordBasic() throws Exception {
-    MultiWord word = new MultiWord(new NumberArray(ints(1)));
+    MultiWord word = new MultiWord(new DigitsArray(ints(1)));
     word.addVariant("a");
     word.addVariant("b");
 
