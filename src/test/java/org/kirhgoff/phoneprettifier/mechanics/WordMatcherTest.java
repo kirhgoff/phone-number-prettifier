@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WordMatcherTest implements ArrayUtilsTrait {
+
   @Test(enabled = false)
   public void testSimpleMatching() throws Exception {
     LetterConverter converter = new LetterConverter();

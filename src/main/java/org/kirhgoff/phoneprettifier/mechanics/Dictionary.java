@@ -3,6 +3,7 @@ package org.kirhgoff.phoneprettifier.mechanics;
 import org.kirhgoff.phoneprettifier.model.MultiWord;
 import org.kirhgoff.phoneprettifier.model.NumberArray;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,5 +26,10 @@ public class Dictionary {
 
   public MultiWord wordFor(int[] numbers) {
     return words.get(new NumberArray(numbers));
+  }
+
+  //TODO could be optimized by restricting word length
+  public Collection<MultiWord> getWords () {
+    return words.values();
   }
 }

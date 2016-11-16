@@ -4,6 +4,9 @@ import org.kirhgoff.phoneprettifier.ArrayUtilsTrait;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.kirhgoff.phoneprettifier.model.Diff.EQUAL;
+import static org.kirhgoff.phoneprettifier.model.Diff.MANY;
+import static org.kirhgoff.phoneprettifier.model.Diff.SINGLE;
 import static org.testng.Assert.fail;
 
 public class NumberArrayTest implements ArrayUtilsTrait {
@@ -25,6 +28,21 @@ public class NumberArrayTest implements ArrayUtilsTrait {
     assertThat(new NumberArray(ints()).toString()).isEqualTo("[]");
     assertThat(new NumberArray(ints(1)).toString()).isEqualTo("[1]");
     assertThat(new NumberArray(ints(1, 2)).toString()).isEqualTo("[1, 2]");
+  }
+
+  @Test
+  public void testDiffsCount() throws Exception {
+    checkDiff(ints(1, 2, 3), ints(1, 2), EQUAL);
+    checkDiff(ints(1, 2, 3), ints(1, 3), SINGLE);
+    checkDiff(ints(1, 2, 3), ints(2, 3), MANY);
+    checkDiff(ints(1, 2, 3, 5, 6), ints(1, 2, 3, 5), EQUAL);
+    checkDiff(ints(1, 2, 3, 5, 6), ints(4, 2, 3, 5), SINGLE);
+  }
+
+  private void checkDiff(int[] source, int[] target, Diff diff) {
+    NumberArray first = new NumberArray(source);
+    NumberArray second = new NumberArray(target);
+    assertThat(first.compareWith(second)).isEqualTo(diff);
   }
 
   private void checkEqualsHashcode(int[] equalData, int[] nonEqual1, int[] nonEqual2) {
