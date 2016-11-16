@@ -1,6 +1,6 @@
 package org.kirhgoff.phoneprettifier.chunk;
 
-public class WordChunk implements Chunk{
+public class WordChunk extends ChunkBase {
   private final String word;
 
   public WordChunk(String word) {

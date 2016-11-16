@@ -37,6 +37,16 @@ public class ChunkTest {
     checkPrinter(new WordWithDigitChunk ("something", 1, 0), "s0mething");
   }
 
+  @Test(enabled = false)
+  public void testChildren() throws Exception {
+    Chunk root = new OneDigitChunk(1);
+    root.addChild(new OneDigitChunk(2));
+    root.addChild(new WordChunk("ceNTer"));
+    root.addChild(new WordWithDigitChunk("right", 0, 4));
+
+    checkPrinter(root, "1-2", "1-CENTER", "1-4IGHT");
+  }
+
   private void checkPrinter(Chunk chunk, String ... something) {
     assertThat(printer.print(chunk)).containsExactly(something);
   }

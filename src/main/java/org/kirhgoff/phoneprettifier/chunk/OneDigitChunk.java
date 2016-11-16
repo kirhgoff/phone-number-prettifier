@@ -1,6 +1,6 @@
 package org.kirhgoff.phoneprettifier.chunk;
 
-public class OneDigitChunk implements Chunk {
+public class OneDigitChunk extends ChunkBase {
   private final int digit;
 
   public OneDigitChunk(int digit) {

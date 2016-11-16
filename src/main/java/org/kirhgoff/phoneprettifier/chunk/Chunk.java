@@ -1,7 +1,13 @@
 package org.kirhgoff.phoneprettifier.chunk;
 
 
+import java.util.List;
+
 public interface Chunk {
+
+  void addChild(Chunk child);
+  List<Chunk> getChildren();
+
   default void assertIsDigit(int digit) {
     if (digit < 0 || digit > 9) {
       throw new IllegalArgumentException("This is no digit: " + digit);
