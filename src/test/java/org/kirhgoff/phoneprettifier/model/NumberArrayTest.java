@@ -14,29 +14,56 @@ public class NumberArrayTest implements ArrayUtilsTrait {
   @Test
   public void testHashCodeEquals() throws Exception {
     checkEqualsHashcode(ints(0, 1, 2), ints(0, 1), ints(0));
-    checkEqualsHashcode(ints(), ints(0, 1), ints(0));
     checkEqualsHashcode(ints(1), ints(0, 1), ints(0));
+  }
 
+  @Test
+  public void testInvalidParams() throws Exception {
     try {
       new NumberArray(null);
       fail("Should fail");
     } catch (IllegalArgumentException e) {}
+
+    try {
+      new NumberArray(ints());
+      fail("Should fail");
+    } catch (IllegalArgumentException e) {}
+
   }
 
   @Test
   public void testToString() throws Exception {
-    assertThat(new NumberArray(ints()).toString()).isEqualTo("[]");
     assertThat(new NumberArray(ints(1)).toString()).isEqualTo("[1]");
     assertThat(new NumberArray(ints(1, 2)).toString()).isEqualTo("[1, 2]");
   }
 
   @Test
   public void testDiffsCount() throws Exception {
+    checkDiff(ints(1), ints(1), EQUAL);
+    checkDiff(ints(1), ints(2), SINGLE);
+    checkDiff(ints(1, 2, 3, 4, 5), ints(1, 2, 3, 4, 5), EQUAL);
+
     checkDiff(ints(1, 2, 3), ints(1, 2), EQUAL);
     checkDiff(ints(1, 2, 3), ints(1, 3), SINGLE);
     checkDiff(ints(1, 2, 3), ints(2, 3), MANY);
+
     checkDiff(ints(1, 2, 3, 5, 6), ints(1, 2, 3, 5), EQUAL);
     checkDiff(ints(1, 2, 3, 5, 6), ints(4, 2, 3, 5), SINGLE);
+  }
+
+  @Test
+  public void testInvalidDiff() throws Exception {
+    //Longer
+    try {
+      checkDiff(ints(1), ints(1, 2), EQUAL);
+      fail("Should fail");
+    } catch (IndexOutOfBoundsException e) {}
+
+    try {
+      NumberArray first = new NumberArray(ints(1, 2));
+      first.compareWith(null);
+      fail("Should fail");
+    } catch(IllegalArgumentException e) {}
   }
 
   private void checkDiff(int[] source, int[] target, Diff diff) {

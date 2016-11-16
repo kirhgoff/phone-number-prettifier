@@ -21,26 +21,25 @@ public class DictionaryTest implements ArrayUtilsTrait {
     dictionary.addWords(words);
 
     //Existent values
-    check(dictionary, ints(3, 3, 3), strings("def", "fed"));
-    check(dictionary, ints(3, 4, 3, 2), strings("dhfa"));
+    checkWordsFound(dictionary, ints(3, 3, 3), strings("def", "fed"));
+    checkWordsFound(dictionary, ints(3, 4, 3, 2), strings("dhfa"));
 
     //No values
-    checkNull(dictionary, ints(3, 3));
-    checkNull(dictionary, ints());
+    checkWordNotFound(dictionary, ints(3, 3));
 
     //Bad input
     try {
-      check(dictionary, null, null);
+      checkWordsFound(dictionary, null, null);
       fail("Should not accept incorrect input");
     } catch (IllegalArgumentException e) {}
   }
 
-  private void check(Dictionary dictionary, int[] number, String[] strings) {
+  private void checkWordsFound(Dictionary dictionary, int[] number, String[] strings) {
     MultiWord multiWord = dictionary.wordFor(number);
     Set<String> variants = multiWord.getVariants();
     assertThat(variants).containsExactly(strings);
   }
-  private void checkNull(Dictionary dictionary, int[] number) {
+  private void checkWordNotFound(Dictionary dictionary, int[] number) {
     assertThat(dictionary.wordFor(number)).isNull();
   }
 

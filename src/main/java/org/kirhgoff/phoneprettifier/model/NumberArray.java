@@ -12,9 +12,8 @@ public class NumberArray {
   private final String string;
 
   public NumberArray(int[] array) {
-    if (array == null) {
-      throw new IllegalArgumentException("nulls are not allowed");
-    }
+    assertNotNull(array);
+    assertNotEmpty(array);
     this.array = Arrays.copyOf(array, array.length);
     this.hashCode = Arrays.hashCode(this.array);
     this.string = Arrays.toString(this.array);
@@ -44,13 +43,13 @@ public class NumberArray {
   }
 
   public Diff compareWith(NumberArray other) {
+    assertNotNull(other);
     assertIsLongerThan(other);
+
     int result = 0;
     for (int i = 0; i < other.length(); i ++) {
       if (this.array[i] != other.array[i]) {
         result ++;
-        //TODO use enum for result?
-        //To avoid excessive comparison
         if (result > 1) {
           return MANY;
         }
@@ -59,9 +58,21 @@ public class NumberArray {
     return result == 0 ? EQUAL : SINGLE;
   }
 
+  private void assertNotNull(Object some) {
+    if (some == null) {
+      throw new IllegalArgumentException("Do not accept nulls");
+    }
+  }
+
   private void assertIsLongerThan(NumberArray other) {
     if (other.length() > this.length()) {
       throw new IndexOutOfBoundsException("Argument should be shorter than " + length() + " but it is " + other.length() + " digits long");
+    }
+  }
+
+  private void assertNotEmpty(int[] array) {
+    if (array.length == 0) {
+      throw new IllegalArgumentException("Empty array is not accepted");
     }
   }
 }
