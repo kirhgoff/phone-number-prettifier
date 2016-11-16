@@ -1,8 +1,6 @@
 package org.kirhgoff.phoneprettifier.model;
 
 import org.kirhgoff.phoneprettifier.ArrayUtilsTrait;
-import org.kirhgoff.phoneprettifier.model.MultiWord;
-import org.kirhgoff.phoneprettifier.model.NumberArray;
 import org.testng.annotations.Test;
 
 import java.util.Set;

@@ -1,9 +1,11 @@
-package org.kirhgoff.phoneprettifier;
+package org.kirhgoff.phoneprettifier.mechanics;
 
+import org.kirhgoff.phoneprettifier.ArrayUtilsTrait;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 public class LetterConverterTest implements ArrayUtilsTrait {
   private final LetterConverter converter = new LetterConverter();

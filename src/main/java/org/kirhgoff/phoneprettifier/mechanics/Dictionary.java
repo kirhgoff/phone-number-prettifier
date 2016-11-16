@@ -1,4 +1,4 @@
-package org.kirhgoff.phoneprettifier;
+package org.kirhgoff.phoneprettifier.mechanics;
 
 import org.kirhgoff.phoneprettifier.model.MultiWord;
 import org.kirhgoff.phoneprettifier.model.NumberArray;

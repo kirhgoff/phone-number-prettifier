@@ -1,5 +1,6 @@
-package org.kirhgoff.phoneprettifier;
+package org.kirhgoff.phoneprettifier.mechanics;
 
+import org.kirhgoff.phoneprettifier.ArrayUtilsTrait;
 import org.kirhgoff.phoneprettifier.chunk.Chunk;
 import org.kirhgoff.phoneprettifier.model.NumberArray;
 import org.testng.annotations.Test;

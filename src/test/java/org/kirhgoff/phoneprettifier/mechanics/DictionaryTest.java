@@ -1,5 +1,6 @@
-package org.kirhgoff.phoneprettifier;
+package org.kirhgoff.phoneprettifier.mechanics;
 
+import org.kirhgoff.phoneprettifier.ArrayUtilsTrait;
 import org.kirhgoff.phoneprettifier.model.MultiWord;
 import org.testng.annotations.Test;
 
