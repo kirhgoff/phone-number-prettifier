@@ -1,5 +1,6 @@
 package org.kirhgoff.phoneprettifier;
 
+import org.kirhgoff.phoneprettifier.model.MultiWord;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;

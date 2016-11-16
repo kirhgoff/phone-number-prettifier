@@ -1,5 +1,8 @@
 package org.kirhgoff.phoneprettifier;
 
+import org.kirhgoff.phoneprettifier.model.MultiWord;
+import org.kirhgoff.phoneprettifier.model.NumberArray;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package org.kirhgoff.phoneprettifier;
+package org.kirhgoff.phoneprettifier.model;
 
 import java.util.Collections;
 import java.util.HashSet;

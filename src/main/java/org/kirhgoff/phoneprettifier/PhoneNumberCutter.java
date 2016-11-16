@@ -1,6 +1,7 @@
 package org.kirhgoff.phoneprettifier;
 
 import org.kirhgoff.phoneprettifier.chunk.Chunk;
+import org.kirhgoff.phoneprettifier.model.NumberArray;
 
 import java.util.Set;
 

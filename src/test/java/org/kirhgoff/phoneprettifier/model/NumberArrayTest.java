@@ -1,5 +1,7 @@
-package org.kirhgoff.phoneprettifier;
+package org.kirhgoff.phoneprettifier.model;
 
+import org.kirhgoff.phoneprettifier.ArrayUtilsTrait;
+import org.kirhgoff.phoneprettifier.model.NumberArray;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

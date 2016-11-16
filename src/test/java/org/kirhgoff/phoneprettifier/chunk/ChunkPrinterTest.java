@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.fail;
 
-public class ChunkTest {
+public class ChunkPrinterTest {
   private ChunkPrinter printer = new ChunkPrinter();
 
   @Test
