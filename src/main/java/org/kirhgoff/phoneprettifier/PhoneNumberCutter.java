@@ -1,5 +1,7 @@
 package org.kirhgoff.phoneprettifier;
 
+import org.kirhgoff.phoneprettifier.chunk.Chunk;
+
 import java.util.Set;
 
 public class PhoneNumberCutter {
