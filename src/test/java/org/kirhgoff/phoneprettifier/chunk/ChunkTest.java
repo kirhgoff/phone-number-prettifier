@@ -29,16 +29,16 @@ public class ChunkTest {
 
   @Test
   public void testWordChunk() throws Exception {
-    checkPrinter(new WordChunk ("something"), "something");
+    checkPrinter(new WordChunk ("something"), "SOMETHING");
   }
 
   @Test
   public void testWordWithDigitChunk() throws Exception {
-    checkPrinter(new WordWithDigitChunk ("something", 1, 0), "s0mething");
+    checkPrinter(new WordWithDigitChunk ("something", 1, 0), "S0METHING");
   }
 
-  @Test(enabled = false)
-  public void testChildren() throws Exception {
+  @Test
+  public void testWithChildren() throws Exception {
     Chunk root = new OneDigitChunk(1);
     root.addChild(new OneDigitChunk(2));
     root.addChild(new WordChunk("ceNTer"));
@@ -48,7 +48,7 @@ public class ChunkTest {
   }
 
   private void checkPrinter(Chunk chunk, String ... something) {
-    assertThat(printer.print(chunk)).containsExactly(something);
+    assertThat(printer.print(chunk)).containsOnly(something);
   }
 
   private void checkInvalid(Supplier<Chunk> supplier) {

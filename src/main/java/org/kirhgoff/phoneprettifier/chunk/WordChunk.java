@@ -7,7 +7,7 @@ public class WordChunk extends ChunkBase {
     if (word == null) {
       throw new IllegalArgumentException("Do not accept null words");
     }
-    this.word = word;
+    this.word = word.toUpperCase();
   }
 
   @Override

@@ -11,7 +11,7 @@ public class WordWithDigitChunk extends ChunkBase {
 
     char[] myNameChars = word.toCharArray();
     myNameChars[index] = String.valueOf(digit).charAt(0);
-    wordWithDigit = String.valueOf(myNameChars);
+    wordWithDigit = String.valueOf(myNameChars).toUpperCase();
   }
 
   @Override

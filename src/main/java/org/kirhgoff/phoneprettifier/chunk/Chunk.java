@@ -1,12 +1,15 @@
 package org.kirhgoff.phoneprettifier.chunk;
 
-
 import java.util.List;
 
 public interface Chunk {
 
   void addChild(Chunk child);
   List<Chunk> getChildren();
+
+  default boolean hasNoChildren() {
+    return getChildren().isEmpty();
+  }
 
   default void assertIsDigit(int digit) {
     if (digit < 0 || digit > 9) {
@@ -31,7 +34,4 @@ public interface Chunk {
       throw new IndexOutOfBoundsException("word is: " + word + ", index=" + index);
     }
   }
-
-
-
 }
