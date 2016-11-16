@@ -4,6 +4,9 @@ public class WordChunk implements Chunk{
   private final String word;
 
   public WordChunk(String word) {
+    if (word == null) {
+      throw new IllegalArgumentException("Do not accept null words");
+    }
     this.word = word;
   }
 

@@ -4,6 +4,8 @@ public class OneDigitChunk implements Chunk {
   private final int digit;
 
   public OneDigitChunk(int digit) {
+    assertIsDigit(digit);
+
     this.digit = digit;
   }
 
