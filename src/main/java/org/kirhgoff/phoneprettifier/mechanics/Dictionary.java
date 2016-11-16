@@ -16,12 +16,13 @@ public class Dictionary {
     this.converter = converter;
   }
 
-  public void addWords (List<String> wordsList) {
+  public Dictionary addWords (List<String> wordsList) {
     for (String word : wordsList) {
       int [] numeric = converter.convertWord(word);
       DigitsArray wrapper = new DigitsArray(numeric);
       words.computeIfAbsent(wrapper, MultiWord::new).addVariant(word);
     }
+    return this;
   }
 
   public MultiWord wordFor(int[] numbers) {

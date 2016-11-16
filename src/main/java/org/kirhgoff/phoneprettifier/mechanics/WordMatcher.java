@@ -18,6 +18,7 @@ public class WordMatcher {
   public static final BiFunction<String, DigitsArray, Chunk> WORD_CHUNK_FACTORY
     = (str, arr) -> new WordChunk(str);
 
+  //TODO wrong, several numbers are allowed to be replaced
   public Set<MatchResult> match(DigitsArray array, Dictionary dictionary) {
 
     Set<MatchResult> results = new HashSet<>();
