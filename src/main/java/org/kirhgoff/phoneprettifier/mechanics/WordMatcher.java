@@ -2,24 +2,23 @@ package org.kirhgoff.phoneprettifier.mechanics;
 
 import org.kirhgoff.phoneprettifier.chunk.Chunk;
 import org.kirhgoff.phoneprettifier.chunk.DeadEndChunk;
-import org.kirhgoff.phoneprettifier.chunk.WordChunk;
-import org.kirhgoff.phoneprettifier.chunk.WordWithDigitChunk;
-import org.kirhgoff.phoneprettifier.model.*;
+import org.kirhgoff.phoneprettifier.chunk.ExactWordChunk;
+import org.kirhgoff.phoneprettifier.chunk.PartiallyMatchedChunk;
+import org.kirhgoff.phoneprettifier.model.Diff;
+import org.kirhgoff.phoneprettifier.model.DigitsArray;
+import org.kirhgoff.phoneprettifier.model.MatchResult;
+import org.kirhgoff.phoneprettifier.model.MultiWord;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import static org.kirhgoff.phoneprettifier.model.Diff.EQUAL;
-import static org.kirhgoff.phoneprettifier.model.Diff.MANY;
-import static org.kirhgoff.phoneprettifier.model.Diff.SINGLE;
-
 public class WordMatcher {
 
   public static final BiFunction<String, DigitsArray, Chunk> WORD_CHUNK_FACTORY
-    = (str, arr) -> new WordChunk(str);
+    = (str, arr) -> new ExactWordChunk(str);
 
-  public static final DeadEndChunk DEAD_END_CHUNK = new DeadEndChunk();
+  private static final DeadEndChunk DEAD_END_CHUNK = new DeadEndChunk();
 
   //TODO wrong, several numbers are allowed to be replaced
   public Set<MatchResult> match(DigitsArray array, Dictionary dictionary) {
@@ -32,18 +31,17 @@ public class WordMatcher {
       }
 
       Diff diff = array.compareWith(word.getNumberArray());
-      if (diff == MANY) {
+      if (!diff.areMatched()) {
         continue;
       }
 
       BiFunction<String, DigitsArray, Chunk> factory = null;
-      if (diff == EQUAL) {
+      if (diff.isExactMatch()) {
         factory = WORD_CHUNK_FACTORY;
-      } else if (diff == SINGLE) {
+      } else {
         //TODO should be very slow - check and rewrite
         factory = (str, arr) -> {
-          int index = word.findDiffIndex(array);
-          return new WordWithDigitChunk(str, index, arr.digitAt(index));
+          return new PartiallyMatchedChunk(str, diff);
         };
       }
 

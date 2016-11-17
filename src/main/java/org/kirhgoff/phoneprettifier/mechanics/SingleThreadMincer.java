@@ -2,7 +2,7 @@ package org.kirhgoff.phoneprettifier.mechanics;
 
 import org.kirhgoff.phoneprettifier.chunk.Chunk;
 import org.kirhgoff.phoneprettifier.chunk.DeadEndChunk;
-import org.kirhgoff.phoneprettifier.chunk.WordChunk;
+import org.kirhgoff.phoneprettifier.chunk.ExactWordChunk;
 import org.kirhgoff.phoneprettifier.model.DigitsArray;
 import org.kirhgoff.phoneprettifier.model.MatchResult;
 
@@ -18,7 +18,7 @@ public class SingleThreadMincer implements Mincer {
 
   @Override
   public Chunk process(DigitsArray phoneNumber) throws InterruptedException {
-    Chunk root = new WordChunk("");
+    Chunk root = new ExactWordChunk("");
     processInternal(root, phoneNumber);
     return root;
   }

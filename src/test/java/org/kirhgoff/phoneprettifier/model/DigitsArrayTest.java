@@ -4,9 +4,6 @@ import org.kirhgoff.phoneprettifier.ArrayUtilsTrait;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.kirhgoff.phoneprettifier.model.Diff.EQUAL;
-import static org.kirhgoff.phoneprettifier.model.Diff.MANY;
-import static org.kirhgoff.phoneprettifier.model.Diff.SINGLE;
 import static org.testng.Assert.fail;
 
 public class DigitsArrayTest implements ArrayUtilsTrait {
@@ -35,23 +32,21 @@ public class DigitsArrayTest implements ArrayUtilsTrait {
 
   @Test
   public void testDiffsCount() throws Exception {
-    checkDiff(ints(1), ints(1), EQUAL);
-    checkDiff(ints(1), ints(2), SINGLE);
-    checkDiff(ints(1, 2, 3, 4, 5), ints(1, 2, 3, 4, 5), EQUAL);
+    checkDiff(ints(1), ints(1), new Diff(true, ints(-1)));
+    checkDiff(ints(1), ints(2), new Diff(true, ints(1)));
+    checkDiff(ints(1, 2, 3, 4, 5), ints(1, 2, 3, 4, 5),
+      new Diff(true, ints(-1, -1, -1, -1, -1)));
 
-    checkDiff(ints(1, 2, 3), ints(1, 2), EQUAL);
-    checkDiff(ints(1, 2, 3), ints(1, 3), SINGLE);
-    checkDiff(ints(1, 2, 3), ints(2, 3), MANY);
-
-    checkDiff(ints(1, 2, 3, 5, 6), ints(1, 2, 3, 5), EQUAL);
-    checkDiff(ints(1, 2, 3, 5, 6), ints(4, 2, 3, 5), SINGLE);
+    checkDiff(ints(1, 2, 3), ints(1, 2), new Diff(true, ints(-1, -1)));
+    checkDiff(ints(1, 2, 3), ints(1, 3), new Diff(true, ints(-1, 2)));
+    checkDiff(ints(1, 2, 3), ints(2, 3), new Diff(false, ints(1, -1)));
   }
 
   @Test
   public void testInvalidDiff() throws Exception {
     //Longer
     try {
-      checkDiff(ints(1), ints(1, 2), EQUAL);
+      checkDiff(ints(1), ints(1, 2), null);
       fail("Should fail");
     } catch (IndexOutOfBoundsException e) {}
 

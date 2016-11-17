@@ -16,22 +16,45 @@ public class WordMatcherTest implements ArrayUtilsTrait {
 
   @Test
   public void testSimpleMatching() throws Exception {
+    checkMatches(
+      digits(3, 6, 6, 5),
+      strings("fool"),
+      strings("FOOL-[]")
+    );
+
+    //One diff
+    checkMatches(
+      digits(3, 8, 6, 5),
+      strings("fool"),
+      strings("F8OL-[]")
+    );
+
+    checkMatches(
+      digits(2, 8, 6, 4),
+      strings("fool"),
+      strings("#-[2, 8, 6, 4]")
+    );
+
+    //Two non-consecutive diffs
+    checkMatches(
+      digits(3, 8, 6, 4),
+      strings("fool"),
+      strings("F8O4-[]")
+    );
+
+  }
+
+  private void checkMatches(DigitsArray phone, String[] dictionaryContent, String[] expectedResult) {
     Dictionary dictionary = new Dictionary();
-    dictionary.addWords(Arrays.asList("ad", "be", "c", "aj", "ddd"));
+    dictionary.addWords(Arrays.asList(dictionaryContent));
     WordMatcher matcher = new WordMatcher();
 
-    DigitsArray phone = new DigitsArray(ints(2, 3, 4));
     Set<MatchResult> results = matcher.match(phone, dictionary);
 
     List<String> printed = results.stream()
         .map(i -> i.getHead().toString() + "-" + i.getRemainder().toString())
         .collect(Collectors.toList());
 
-    assertThat(printed).containsOnly(
-      "AD-[4]", "BE-[4]", //Unwraps multiword
-      "C-[3, 4]",
-      "A3-[4]" //one digit
-    );
-
+    assertThat(printed).containsOnly(expectedResult);
   }
 }

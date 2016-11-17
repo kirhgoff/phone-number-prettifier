@@ -3,9 +3,6 @@ package org.kirhgoff.phoneprettifier.model;
 import java.util.Arrays;
 
 import static java.util.Arrays.copyOfRange;
-import static org.kirhgoff.phoneprettifier.model.Diff.EQUAL;
-import static org.kirhgoff.phoneprettifier.model.Diff.MANY;
-import static org.kirhgoff.phoneprettifier.model.Diff.SINGLE;
 
 public class DigitsArray {
   private final int [] array;
@@ -56,16 +53,23 @@ public class DigitsArray {
     assertNotNull(other);
     assertIsLongerThan(other);
 
-    int result = 0;
+    boolean matched = true;
+    int lastDiff = Integer.MIN_VALUE;
+    int [] diffs = new int[other.length()];
+    Arrays.fill(diffs, -1);
+
     for (int i = 0; i < other.length(); i ++) {
-      if (this.array[i] != other.array[i]) {
-        result ++;
-        if (result > 1) {
-          return MANY;
+      if (array[i] != other.array[i]) {
+        if (lastDiff + 1 == i) {
+          matched = false;
+          break;
         }
+
+        lastDiff = i;
+        diffs[i] = array[i];
       }
     }
-    return result == 0 ? EQUAL : SINGLE;
+    return new Diff (matched, diffs);
   }
 
   //TODO int parameter is enough

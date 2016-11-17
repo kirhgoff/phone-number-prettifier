@@ -1,9 +1,9 @@
 package org.kirhgoff.phoneprettifier.chunk;
 
-public class WordChunk extends ChunkBase {
+public class ExactWordChunk extends ChunkBase {
   private final String word;
 
-  public WordChunk(String word) {
+  public ExactWordChunk(String word) {
     assertNotNull(word);
     this.word = word.toUpperCase();
   }
