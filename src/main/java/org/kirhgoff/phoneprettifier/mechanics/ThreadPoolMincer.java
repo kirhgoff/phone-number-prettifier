@@ -10,7 +10,8 @@ import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class PhoneMincer {
+//TODO need to make Chunks thread safe, later if needed
+public class ThreadPoolMincer implements Mincer {
   //TODO use ForkJoinPool
   private final ThreadPoolExecutor executor
     = (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
@@ -18,7 +19,7 @@ public class PhoneMincer {
   private Dictionary dictionary;
   private final WordMatcher matcher = new WordMatcher();
 
-  public PhoneMincer(Dictionary dictionary) {
+  public ThreadPoolMincer(Dictionary dictionary) {
     this.dictionary = dictionary;
   }
 

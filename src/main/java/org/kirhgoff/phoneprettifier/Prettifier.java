@@ -2,9 +2,7 @@ package org.kirhgoff.phoneprettifier;
 
 
 import org.kirhgoff.phoneprettifier.chunk.Chunk;
-import org.kirhgoff.phoneprettifier.mechanics.ChunkPrinter;
-import org.kirhgoff.phoneprettifier.mechanics.Dictionary;
-import org.kirhgoff.phoneprettifier.mechanics.PhoneMincer;
+import org.kirhgoff.phoneprettifier.mechanics.*;
 import org.kirhgoff.phoneprettifier.model.DigitsArray;
 
 import java.io.IOException;
@@ -30,8 +28,8 @@ public class Prettifier {
 
     Options options = parseOptions(args);
 
-    final PhoneMincer mincer =
-      new PhoneMincer(Dictionary.fromFile(options.dictionaryPath));
+    Dictionary dictionary = Dictionary.fromFile(options.dictionaryPath);
+    final Mincer mincer = new SingleThreadMincer(dictionary);
 
     if (!options.phoneNumbersSources.isEmpty()) {
       readLinesFrom(options.phoneNumbersSources).stream()
@@ -43,11 +41,9 @@ public class Prettifier {
     } else {
       runInteractiveLoop(mincer);
     }
-
-    mincer.shutdown();
   }
 
-  private static void runInteractiveLoop(PhoneMincer mincer) {
+  private static void runInteractiveLoop(Mincer mincer) {
     Scanner scanner = new Scanner(System.in);
     println("Switched to interactive mode, press Ctrl+C to quit");
     while (true) {
@@ -67,7 +63,7 @@ public class Prettifier {
     }
   }
 
-  private static void processPhoneNumber(DigitsArray array, PhoneMincer mincer) {
+  private static void processPhoneNumber(DigitsArray array, Mincer mincer) {
     long started = System.currentTimeMillis();
     try {
       println("Processing phone number: " + array);
