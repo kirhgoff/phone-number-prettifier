@@ -1,6 +1,7 @@
 package org.kirhgoff.phoneprettifier.mechanics;
 
 import org.kirhgoff.phoneprettifier.chunk.Chunk;
+import org.kirhgoff.phoneprettifier.chunk.DeadEndChunk;
 import org.kirhgoff.phoneprettifier.chunk.WordChunk;
 import org.kirhgoff.phoneprettifier.chunk.WordWithDigitChunk;
 import org.kirhgoff.phoneprettifier.model.*;
@@ -18,10 +19,12 @@ public class WordMatcher {
   public static final BiFunction<String, DigitsArray, Chunk> WORD_CHUNK_FACTORY
     = (str, arr) -> new WordChunk(str);
 
+  public static final DeadEndChunk DEAD_END_CHUNK = new DeadEndChunk();
+
   //TODO wrong, several numbers are allowed to be replaced
   public Set<MatchResult> match(DigitsArray array, Dictionary dictionary) {
-
     Set<MatchResult> results = new HashSet<>();
+
     for (MultiWord word : dictionary.getWords()) {
       //TODO again - reduce dictionary for phone size
       if (word.length() > array.length()) {
@@ -52,6 +55,9 @@ public class WordMatcher {
       }
     }
 
+    if (results.isEmpty()) {
+      results.add(new MatchResult(DEAD_END_CHUNK, array));
+    }
     return results;
   }
 }

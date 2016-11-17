@@ -31,7 +31,7 @@
               </descriptors>
               <archive>
                   <manifest>
-                      <mainClass>org.kirhgoff.phoneprettifier.Main</mainClass>
+                      <mainClass>org.kirhgoff.phoneprettifier.Prettifier</mainClass>
                   </manifest>
               </archive>
           </configuration>

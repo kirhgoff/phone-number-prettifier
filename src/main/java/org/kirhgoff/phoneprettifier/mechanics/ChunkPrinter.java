@@ -1,4 +1,7 @@
-package org.kirhgoff.phoneprettifier.chunk;
+package org.kirhgoff.phoneprettifier.mechanics;
+
+import org.kirhgoff.phoneprettifier.chunk.Chunk;
+import org.kirhgoff.phoneprettifier.chunk.DeadEndChunk;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,7 +18,7 @@ public class ChunkPrinter {
 
   private void printRecursive(String previousPath, Chunk chunk, List<String> result) {
     String string = chunk.toString();
-    if (chunk.hasNoChildren()) {
+    if (!(chunk instanceof DeadEndChunk) && chunk.hasNoChildren()) {
       result.add(previousPath + string);
     } else {
       for (Chunk child : chunk.getChildren()) {

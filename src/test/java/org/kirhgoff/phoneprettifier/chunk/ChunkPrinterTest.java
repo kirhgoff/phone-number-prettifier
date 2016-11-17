@@ -1,5 +1,6 @@
 package org.kirhgoff.phoneprettifier.chunk;
 
+import org.kirhgoff.phoneprettifier.mechanics.ChunkPrinter;
 import org.testng.annotations.Test;
 
 import java.util.function.Supplier;
