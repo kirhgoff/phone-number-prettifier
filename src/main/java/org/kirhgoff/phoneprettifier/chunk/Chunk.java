@@ -2,10 +2,22 @@ package org.kirhgoff.phoneprettifier.chunk;
 
 import java.util.List;
 
+/**
+ * Beginning of a transformed number,
+ * could end on char replaced with a number.
+ * All the possible variants are represented
+ * by the tree of chunks
+ */
 public interface Chunk {
+  int NO_CHANGE = -1;
 
   void addChild(Chunk child);
   List<Chunk> getChildren();
+
+  /**
+   * @return whether last symbol was replaced by digit or not
+   */
+  boolean lastCharIsDigit();
 
   default boolean hasNoChildren() {
     return getChildren().isEmpty();

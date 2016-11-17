@@ -8,19 +8,19 @@ import java.util.Arrays;
  * matched values are marked by -1, diffs are real digits
  */
 public class Diff {
+  private final int[] diffs;
   private final boolean matched;
   private final boolean exactMatch;
-  private final int[] diffs;
 
   public Diff(boolean matched, int[] diffs) {
-    this.matched = matched;
     this.diffs = diffs;
+    this.matched = matched;
     this.exactMatch = checkIsExactMatch();
   }
 
   private boolean checkIsExactMatch() {
-    for (int i = 0; i < diffs.length; i++) {
-      if (diffs[i] != -1) return false;
+    for (int diff : diffs) {
+      if (diff != -1) return false;
     }
     return true;
   }
@@ -31,6 +31,10 @@ public class Diff {
 
   public boolean isExactMatch() {
     return exactMatch;
+  }
+
+  public boolean haveExactFirstChar() {
+    return diffs[0] == -1;
   }
 
   public int digitAt(int index) {
@@ -48,8 +52,8 @@ public class Diff {
 
     Diff diff = (Diff) o;
 
-    if (matched != diff.matched) return false;
-    return Arrays.equals(diffs, diff.diffs);
+    return matched == diff.matched
+      && Arrays.equals(diffs, diff.diffs);
   }
 
   @Override

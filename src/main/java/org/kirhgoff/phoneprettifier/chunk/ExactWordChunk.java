@@ -12,4 +12,9 @@ public class ExactWordChunk extends ChunkBase {
   public String toString() {
     return word;
   }
+
+  @Override
+  public boolean lastCharIsDigit() {
+    return false;
+  }
 }

@@ -2,8 +2,13 @@ package org.kirhgoff.phoneprettifier.chunk;
 
 import org.kirhgoff.phoneprettifier.model.Diff;
 
+/**
+ * Dictionary word that was partially matched
+ * (without two consecutive changes)
+ */
 public class PartiallyMatchedChunk extends ChunkBase {
   private final String wordWithDigitsReplaced;
+  private final boolean lastCharIsDigit;
 
   public PartiallyMatchedChunk(String word, Diff diff) {
     assertNotNull(word);
@@ -18,10 +23,16 @@ public class PartiallyMatchedChunk extends ChunkBase {
       }
     }
     wordWithDigitsReplaced = String.valueOf(initialChars).toUpperCase();
+    lastCharIsDigit = diff.digitAt(diff.length() - 1) != NO_CHANGE;
   }
 
   @Override
   public String toString() {
     return wordWithDigitsReplaced;
+  }
+
+  @Override
+  public boolean lastCharIsDigit() {
+    return lastCharIsDigit;
   }
 }

@@ -19,10 +19,11 @@ public class SingleThreadMincerTest implements ArrayUtilsTrait {
       .addWords(Arrays.asList("cat", "luv", "ab", "ultu"));
     Mincer mincer = new SingleThreadMincer(dictionary);
 
-    checkMincer(mincer, digits(2, 2, 8, 5, 8, 8), "CAT-LUV", "AB-ULTU");
-    checkMincer(mincer, digits(2, 2, 2), "CA2");
-    checkMincer(mincer, digits(2, 2, 8), "CAT");
+    checkMincer(mincer, digits(2, 2, 2), "CA2", "2-AB");
+    checkMincer(mincer, digits(2, 2, 8), "CAT", "2-A8");
     checkMincer(mincer, digits(5, 8, 8), "LUV");
+
+    checkMincer(mincer, digits(2, 2, 2, 2), "AB-AB", "2-CA2");
   }
 
   private void checkMincer(

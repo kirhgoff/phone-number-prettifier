@@ -3,7 +3,7 @@ package org.kirhgoff.phoneprettifier.chunk;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ChunkBase implements Chunk {
+public abstract class ChunkBase implements Chunk {
   private List<Chunk> children = new LinkedList<>();
 
   @Override

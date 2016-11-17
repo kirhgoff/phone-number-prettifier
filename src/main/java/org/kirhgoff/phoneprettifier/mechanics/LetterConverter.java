@@ -1,7 +1,11 @@
 package org.kirhgoff.phoneprettifier.mechanics;
 
-public class LetterConverter {
-  private final String [] rows = new String [] {
+/**
+ * Converts from letters to digits
+ * correspondingly to specification
+ */
+class LetterConverter {
+  private static final String [] ROWS = new String [] {
       "abcABC",
       "defDEF",
       "ghiGHI",
@@ -12,30 +16,30 @@ public class LetterConverter {
       "wxyzWXYZ"
   };
 
-  private final int [] numbers = new int [128];
+  private final int [] asciiCharsToDigits = new int [128];
 
-  public LetterConverter() {
-    for (int i = 0; i < rows.length; i ++) {
-      char chars[] = rows[i].toCharArray();
+  LetterConverter() {
+    for (int i = 0; i < ROWS.length; i ++) {
+      char chars[] = ROWS[i].toCharArray();
       for (char chr : chars) {
-        numbers[(int)chr] = i + 2; //Dangerous conversion
+        asciiCharsToDigits[(int)chr] = i + 2; //Dangerous conversion
       }
     }
   }
 
   int convertChar(char chr) {
     int index = (int)chr;
-    if (index < 0 || index > numbers.length) {
+    if (index < 0 || index > asciiCharsToDigits.length) {
       throw new IllegalArgumentException("Cannot convert " + chr);
     }
-    int result = numbers[index];
+    int result = asciiCharsToDigits[index];
     if (result == 0) {
       throw new IllegalArgumentException("Cannot convert " + chr);
     }
     return result;
   }
 
-  public int [] convertWord(String word) {
+  int [] convertWord(String word) {
     if (word == null) {
       throw new IllegalArgumentException("Cannot convert null word");
     }

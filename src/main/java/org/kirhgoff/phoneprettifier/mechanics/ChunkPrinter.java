@@ -6,9 +6,12 @@ import org.kirhgoff.phoneprettifier.chunk.DeadEndChunk;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Takes a chunks tree and collects all the paths
+ * from root to every leaf, except DeadEnd leafs
+ */
 public class ChunkPrinter {
-
-  public static final String DELIMITER = "-";
+  private static final String DELIMITER = "-";
 
   public List<String> print(Chunk chunk) {
     List<String> results = new LinkedList<>();
@@ -22,9 +25,9 @@ public class ChunkPrinter {
       result.add(previousPath + string);
     } else {
       for (Chunk child : chunk.getChildren()) {
-        String newPath; //TODO refactor this
+        String newPath;
         if (string.length() == 0) {
-          newPath = previousPath;
+          newPath = previousPath; //First call case
         } else {
           newPath = previousPath + string + DELIMITER;
         }

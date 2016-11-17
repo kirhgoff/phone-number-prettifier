@@ -1,30 +1,17 @@
-package org.kirhgoff.phoneprettifier.chunk;
+package org.kirhgoff.phoneprettifier.mechanics;
 
 import org.kirhgoff.phoneprettifier.ArrayUtilsTrait;
-import org.kirhgoff.phoneprettifier.mechanics.ChunkPrinter;
+import org.kirhgoff.phoneprettifier.chunk.Chunk;
+import org.kirhgoff.phoneprettifier.chunk.ExactWordChunk;
+import org.kirhgoff.phoneprettifier.chunk.OneDigitChunk;
+import org.kirhgoff.phoneprettifier.chunk.PartiallyMatchedChunk;
 import org.kirhgoff.phoneprettifier.model.Diff;
 import org.testng.annotations.Test;
 
-import java.util.function.Supplier;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.testng.Assert.fail;
 
 public class ChunkPrinterTest implements ArrayUtilsTrait {
   private ChunkPrinter printer = new ChunkPrinter();
-
-  @Test
-  public void testInvalidChunks() throws Exception {
-    checkInvalid(() -> new OneDigitChunk(16));
-    checkInvalid(() -> new OneDigitChunk(-1));
-    checkInvalid(() -> new ExactWordChunk(null));
-    checkInvalid(() -> new PartiallyMatchedChunk(null,
-      new Diff(true, ints())));
-    checkInvalid(() -> new PartiallyMatchedChunk("aaa",
-      new Diff(true, ints(1, 2, 3, 4))));
-    checkInvalid(() -> new PartiallyMatchedChunk("aaa",
-      new Diff(true, ints(12))));
-  }
 
   @Test
   public void testOneDigitChunk() throws Exception {
@@ -55,13 +42,5 @@ public class ChunkPrinterTest implements ArrayUtilsTrait {
 
   private void checkPrinter(Chunk chunk, String ... something) {
     assertThat(printer.print(chunk)).containsOnly(something);
-  }
-
-  private void checkInvalid(Supplier<Chunk> supplier) {
-    try{
-      supplier.get();
-      fail("Should fail");
-    }
-    catch (IllegalArgumentException | IndexOutOfBoundsException e) {}
   }
 }

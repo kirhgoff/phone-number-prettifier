@@ -20,8 +20,7 @@ public class WordMatcher {
 
   private static final DeadEndChunk DEAD_END_CHUNK = new DeadEndChunk();
 
-  //TODO wrong, several numbers are allowed to be replaced
-  public Set<MatchResult> match(DigitsArray array, Dictionary dictionary) {
+  public Set<MatchResult> match(DigitsArray array, Dictionary dictionary, boolean exactFirstChar) {
     Set<MatchResult> results = new HashSet<>();
 
     for (MultiWord word : dictionary.getWords()) {
@@ -31,22 +30,19 @@ public class WordMatcher {
       }
 
       Diff diff = array.compareWith(word.getNumberArray());
-      if (!diff.areMatched()) {
+      if (!diff.areMatched() || (exactFirstChar && !diff.haveExactFirstChar())) {
         continue;
       }
 
-      BiFunction<String, DigitsArray, Chunk> factory = null;
+      BiFunction<String, DigitsArray, Chunk> factory;
       if (diff.isExactMatch()) {
         factory = WORD_CHUNK_FACTORY;
       } else {
         //TODO should be very slow - check and rewrite
-        factory = (str, arr) -> {
-          return new PartiallyMatchedChunk(str, diff);
-        };
+        factory = (str, arr) -> new PartiallyMatchedChunk(str, diff);
       }
 
       for (String string : word.getVariants()) {
-        //TODO suppress warning
         Chunk chunk = factory.apply(string, array);
         DigitsArray tail = array.bite(word.getNumberArray());
         results.add(new MatchResult(chunk, tail));

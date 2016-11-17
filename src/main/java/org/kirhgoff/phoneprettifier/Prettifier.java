@@ -1,6 +1,5 @@
 package org.kirhgoff.phoneprettifier;
 
-
 import org.kirhgoff.phoneprettifier.chunk.Chunk;
 import org.kirhgoff.phoneprettifier.mechanics.*;
 import org.kirhgoff.phoneprettifier.model.DigitsArray;
@@ -73,8 +72,6 @@ public class Prettifier {
       results.forEach(Prettifier::println);
 
       println("Printed " + results.size() + " variants.");
-    } catch (InterruptedException e) {
-      println("Interrupted");
     } finally {
       println ("Finished in " + (System.currentTimeMillis() - started) + " millis");
     }
@@ -120,7 +117,7 @@ public class Prettifier {
         if (args.length == i + 1) {
           printUsageAndExit();
         } else {
-          options.dictionaryPath = args[i++];
+          options.dictionaryPath = args[++i];
         }
       } else {
         options.phoneNumbersSources.add(args[i]);
